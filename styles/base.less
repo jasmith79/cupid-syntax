@@ -1,0 +1,469 @@
+@import "syntax-variables";
+@import "colors";
+
+// EDITOR BACKGROUND & FONT COLORS
+atom-text-editor, :host {
+  background-color: @syntax-background-color;
+  color: @syntax-text-color;
+
+  .wrap-guide {
+    background-color: @syntax-wrap-guide-color;
+  }
+
+  .indent-guide {
+    color: @syntax-indent-guide-color;
+  }
+
+  .invisible-character {
+    color: @syntax-invisible-character-color;
+  }
+
+  .gutter {
+    background-color: @syntax-gutter-background-color;
+    color: @syntax-gutter-text-color;
+
+    .line-number {
+      &.cursor-line {
+        background-color: @syntax-gutter-background-color-selected;
+        color: @syntax-gutter-text-color-selected;
+      }
+
+      &.cursor-line-no-selection {
+        color: @syntax-gutter-text-color-selected;
+      }
+    }
+  }
+
+  // LINE NUMBER FOR SECTIONS THAT HAVE BEEN COLLAPSED
+  .gutter .line-number.folded,
+  .gutter .line-number:after,
+  .fold-marker:after {
+    color: @light-gray;
+  }
+
+  .invisible {
+    color: @syntax-text-color;
+  }
+
+  .cursor {
+    color: @syntax-cursor-color;
+  }
+
+  .selection .region {
+    background-color: @syntax-selection-color;
+  }
+}
+
+// ADD LEFT PADDING TO CODE VIEW
+.scroll-view {
+  padding-left: 10px;
+}
+
+atom-text-editor .search-results .marker .region,
+:host .search-results .marker .region {
+  background-color: transparent;
+  border: 1px solid @syntax-result-marker-color;
+}
+
+atom-text-editor .search-results .marker.current-result .region,
+:host .search-results .marker.current-result .region {
+  border: 1px solid @syntax-result-marker-color-selected;
+}
+
+.comment {
+  color: @comment;
+}
+
+.entity {
+  &.name.type {
+    color: @pink;
+    text-decoration: underline;
+  }
+
+  &.other.inherited-class {
+    color: @green;
+  }
+}
+
+.keyword {
+
+    // @ of @font-face & @media
+  color: @keyword;
+
+  // try, catch, if, else, return (js), import of @import LESS
+  &.control {
+    color: @control;
+  }
+
+  // =, +, -, ?, :, !=. &&, in (js)
+  &.operator {
+    color: @operator;
+  }
+
+  // can't tell what this does :/
+  &.other.special-method {
+    color: @purple;
+  }
+
+  // can't tell what this does :/
+  &.other.unit {
+    color: @light-pink;
+  }
+}
+
+.storage {
+
+  // var of var a = b;
+  color: @storage;
+}
+
+.constant {
+
+  // true, false, null, undefined
+  color: @constant;
+
+  &.character.escape {
+
+    // \ of ("what\'s")
+    color: @light-blue;
+  }
+
+  &.numeric {
+
+    // all the numbers!
+    color: @numeric;
+  }
+
+  // can't tell what this does :/
+  &.other.color {
+    color: @light-blue;
+  }
+
+  // can't tell what this does :/
+  &.other.symbol {
+    color: @green;
+  }
+}
+
+.variable {
+
+  // this (js), @varable_name (sass), http://web.com of url(http://web.com), variable of {{variable}} (handlebars)
+  color: @variable;
+
+  //?
+  &.interpolation {
+    color: darken(@purple, 10%);
+  }
+
+  //foo, bar of function(foo, bar) {}
+  &.parameter.function {
+    color: @function-param;
+  }
+}
+
+.invalid.illegal {
+  background-color: @error;
+  color: @syntax-background-color;
+}
+
+.string {
+
+  // 'value' of var='value', "name.png" or src="name.png"  , etc
+  color: @string;
+
+
+  &.regexp {
+
+    // ?:input, select, textarea, button of  /^(?:input|select|textarea|button)$/i,
+    color: @regex;
+
+    .constant.character.escape,
+    .source.ruby.embedded,
+    .string.regexp.arbitrary-repitition {
+      color: @regex;
+    }
+
+    &.group {
+      color: @regex;
+    }
+
+    &.character-class {
+      color: @regex;
+    }
+
+    .source.ruby.embedded {
+      color: @regex;
+    }
+
+  }
+
+  &.other.link {
+    color: @purple;
+  }
+}
+
+// String interpolation in Ruby, CoffeeScript, and others
+.source .string {
+  .source,
+  .meta.embedded.line {
+    color: @string;
+  }
+
+  .punctuation.section.embedded {
+    color: @string;
+
+    .source {
+      color: @string;  // Required for the end of embedded strings in Ruby # 716
+    }
+  }
+}
+
+.punctuation {
+  &.definition {
+    &.comment {
+      color: @comment-punc;
+    }
+
+    // QUOTES
+    &.string,
+    &.variable,
+    &.parameters,
+    &.array {
+      color: @string;
+    }
+
+    &.heading,
+    &.identity {
+      color: @purple;
+    }
+
+    &.bold {
+      color: @gold;
+      font-weight: bold;
+    }
+
+    &.italic {
+      color: @purple;
+      font-style: italic;
+    }
+  }
+
+  &.section.embedded {
+    color: darken(@purple, 10%);
+  }
+
+}
+
+.support {
+
+  // background of background: none,
+  color: @support;
+
+  // SUPPORT | module of module.exports
+  &.class {
+    color: @class;
+  }
+
+  // .log of console.log, url of url(http://web.com) require in node
+  &.function  {
+    color: @mid-blue;
+
+    // can't tell what this does :/
+    &.any-method {
+      color: @purple;
+    }
+  }
+
+  // {{}} of {{ variable }}
+  &.constant {
+    color: @code-font-color;  // none of text-decoration: none; also js.props
+  }
+
+  &.type.property-name.css {
+    color: @support;
+  }
+}
+
+.html {
+
+  .string {
+    color: @string; // @code-font-color !important;
+  }
+
+
+  // inline elements - <span>
+  .meta {
+    color: @tag;
+
+  }
+
+  .punctuation.definition.tag {
+    color: @tag;
+  }
+
+  .entity {
+
+    &.name.tag {
+      text-decoration: none;
+
+      // structural elements - <html>
+      &.structure {
+        color: @tag;
+      }
+
+      // block level elements - <div>, <h1>
+      &.block {
+        color: @tag;
+      }
+
+      // inline elements - <span>
+      &.script {
+        color: @script;
+      }
+
+    }
+
+    &.other {
+      &.attribute-name {
+        color: @element-attr;
+      }
+    }
+
+  }
+
+}
+
+// ENTITY | exports of module.exports, <div id= of <div id="#id">, . of .className
+.entity {
+
+  color: @entity;
+
+  // console of console.log (js)
+  &.name.type {
+    color: @entity;
+    text-decoration: none;
+  }
+
+  // init in init: function(){} (js)
+  &.name.function {
+    color: @pink;
+  }
+
+  //Foo of class Foo
+  &.name.class, &.name.type.class {
+    color: @entity;
+  }
+
+  &.name.section {
+    color: @purple;
+  }
+
+  // div of <div> (html), body of body{} (css) moved this to the html declarations
+  // &.name.tag {
+  //   color: @purple;
+  //   text-decoration: underline;
+  // }
+
+  // CSS CLASSES
+  &.other.attribute-name {
+    color: @css-class;
+
+    //CSS ID's
+    &.id {
+      color: @css-id;
+    }
+  }
+}
+
+.meta {
+  &.class {
+    color: @gold;
+  }
+
+  &.link {
+    color: @orange;
+  }
+
+  &.require {
+    color: @purple;
+  }
+
+  // .css files | commas, ([controls]) of audio:not([controls])
+  &.selector {
+    color: @pink;
+  }
+
+  &.separator {
+    background-color: @gray;
+    color: @syntax-text-color;
+  }
+
+  &.brace {
+
+    // curly braces - {}
+    &.curly {
+      color: @brackets;
+    }
+
+    // parenthesis - ()
+    &.round {
+      color: @code-font-color;
+    }
+  }
+}
+
+.none {
+  color: @syntax-text-color;
+}
+
+.markup {
+  &.bold {
+    color: @orange;
+    font-weight: bold;
+  }
+
+  &.changed {
+    color: @purple;
+  }
+
+  &.deleted {
+    color: @purple;
+  }
+
+  &.italic {
+    color: @purple;
+    font-style: italic;
+  }
+
+  &.heading .punctuation.definition.heading {
+    color: @purple;
+  }
+
+  &.inserted {
+    color: @green;
+  }
+
+  &.list {
+    color: @purple;
+  }
+
+  &.quote {
+    color: @gold;
+  }
+
+  &.raw.inline {
+    color: @green;
+  }
+}
+
+.source.gfm .markup {
+  -webkit-font-smoothing: auto;
+  &.heading {
+    color: @green;
+  }
+}
+
+atom-text-editor[mini] .scroll-view,
+:host([mini]) .scroll-view {
+  padding-left: 1px;
+}

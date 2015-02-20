@@ -1,0 +1,11 @@
+{
+  "name": "cupid-syntax",
+  "theme": "syntax",
+  "version": "0.0.0",
+  "description": "Jared's personal syntax theme",
+  "repository": "https://github.com/jasmith79/cupid-syntax.git",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  }
+}
